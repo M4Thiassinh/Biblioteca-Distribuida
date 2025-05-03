@@ -1,1 +1,1 @@
-# biblioteca_distribuida
+# biblioteca-distribuida
