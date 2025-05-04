@@ -1,0 +1,15 @@
+{
+    "esclavos": [
+      "localhost:8001",
+      "localhost:8002",
+      "localhost:8003",
+      "localhost:8004"
+    ],
+    "tipos_doc": {
+      "tesis": "localhost:8001",
+      "libro": "localhost:8002",
+      "video": "localhost:8003",
+      "articulo": "localhost:8004"
+    }
+  }
+  
