@@ -1,14 +1,10 @@
 from flask import Flask, request, jsonify
+import mysql.connector
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 app = Flask(__name__)
-
-# Simular base de datos local del esclavo
-DOCUMENTOS = [
-    {"titulo": "Ecuaciones Diferenciales", "tipo": "tesis", "genero": "ciencia", "contenido": "contenido..."},
-    {"titulo": "Machine Learning Avanzado", "tipo": "tesis", "genero": "ciencia", "contenido": "contenido..."},
-    {"titulo": "Inteligencia Artificial", "tipo": "tesis", "genero": "ciencia ficción", "contenido": "contenido..."},
-    {"titulo": "Redes Neuronales", "tipo": "tesis", "genero": "tecnología", "contenido": "contenido..."}
-]
 
 PREFERENCIAS = {
     "10-15": "ciencia ficción",
@@ -21,22 +17,37 @@ def calcular_score(doc, query, edad):
     for palabra in query.lower().split():
         if palabra in doc['titulo'].lower():
             score += 10
-
     if 10 <= edad <= 15 and doc['genero'] == PREFERENCIAS["10-15"]:
         score += 5
     elif 16 <= edad <= 25 and doc['genero'] == PREFERENCIAS["16-25"]:
         score += 5
     elif edad >= 26 and doc['genero'] == PREFERENCIAS["26+"]:
         score += 5
-
+        
     return score
+
+def obtener_documentos():
+    conexion = mysql.connector.connect(
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB1")
+    )
+    cursor = conexion.cursor(dictionary=True)
+    query = "SELECT * FROM documentos WHERE tipo = 'tesis'"
+    cursor.execute(query)
+    resultados = cursor.fetchall()
+    cursor.close()
+    conexion.close()
+    return resultados
 
 @app.route('/buscar_titulo')
 def buscar_titulo():
     query = request.args.get('titulo', '')
     edad = int(request.args.get('edad', 18))
     resultados = []
-    for doc in DOCUMENTOS:
+    documentos = obtener_documentos()
+    for doc in documentos:
         score = calcular_score(doc, query, edad)
         if score > 0:
             doc_result = doc.copy()
@@ -49,7 +60,8 @@ def buscar_tipo():
     tipo = request.args.get('tipo')
     edad = int(request.args.get('edad', 18))
     resultados = []
-    for doc in DOCUMENTOS:
+    documentos = obtener_documentos()
+    for doc in documentos:
         if doc['tipo'] == tipo:
             score = calcular_score(doc, doc['titulo'], edad)
             doc_result = doc.copy()
