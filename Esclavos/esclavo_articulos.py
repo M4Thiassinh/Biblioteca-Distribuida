@@ -2,36 +2,28 @@ from flask import Flask, request, jsonify
 import mysql.connector
 from dotenv import load_dotenv
 import os
+import Pyro5.api
+import socket
+import time
+import re
+from utils import calcular_score, enviar_log
+
+LOG_SERVER_URI = "PYRONAME:logserver" 
+
+
 load_dotenv()
 
 app = Flask(__name__)
 
-PREFERENCIAS = {
-    "10-15": "ciencia ficción",
-    "16-25": "tecnología",
-    "26+": "ciencia"
-}
+ESCLAVO= 'esclavo_articulos'
 
-def calcular_score(doc, query, edad):
-    score = 0
-    for palabra in query.lower().split():
-        if palabra in doc['titulo'].lower():
-            score += 10
-    if 10 <= edad <= 15 and doc['genero'] == PREFERENCIAS["10-15"]:
-        score += 5
-    elif 16 <= edad <= 25 and doc['genero'] == PREFERENCIAS["16-25"]:
-        score += 5
-    elif edad >= 26 and doc['genero'] == PREFERENCIAS["26+"]:
-        score += 5
-        
-    return score
 
 def obtener_documentos():
     conexion = mysql.connector.connect(
         host=os.getenv("DB_HOST"),
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB4")
+        database=os.getenv("DB4"),
     )
     cursor = conexion.cursor(dictionary=True)
     query = "SELECT * FROM documentos WHERE tipo = 'articulo'"
@@ -43,30 +35,47 @@ def obtener_documentos():
 
 @app.route('/buscar_titulo')
 def buscar_titulo():
+    timestamp_ini = time.time()
     query = request.args.get('titulo', '')
-    edad = int(request.args.get('edad', 18))
+    edad = int(request.args.get('edad', 0))
     resultados = []
+    score_promedio = 0
     documentos = obtener_documentos()
+
     for doc in documentos:
         score = calcular_score(doc, query, edad)
         if score > 0:
             doc_result = doc.copy()
             doc_result['score'] = score
             resultados.append(doc_result)
+            score_promedio += score
+
+    score_promedio = score_promedio / len(resultados) if resultados else 0
+    timestamp_fin = time.time()   
+    enviar_log(timestamp_ini, timestamp_fin, "buscar_titulo",ESCLAVO, query, score_promedio, edad)
     return jsonify(resultados)
 
 @app.route('/buscar_tipo')
 def buscar_tipo():
-    tipo = request.args.get('tipo')
-    edad = int(request.args.get('edad', 18))
+    timestamp_ini = time.time()
+    tipo_param = request.args.get('tipo', '')
+    tipos = re.split(r'[+, ]+', tipo_param.strip().lower())  # Divide por +, , o espacios
+
+    edad = int(request.args.get('edad', 0))
     resultados = []
+    score_promedio = 0
     documentos = obtener_documentos()
     for doc in documentos:
-        if doc['tipo'] == tipo:
-            score = calcular_score(doc, doc['titulo'], edad)
+        if doc['tipo'].lower() in tipos:
+            score = calcular_score(doc,'', edad)
             doc_result = doc.copy()
             doc_result['score'] = score
             resultados.append(doc_result)
+            score_promedio += score
+
+    score_promedio = score_promedio / len(resultados) if resultados else 0
+    timestamp_fin = time.time()
+    enviar_log(timestamp_ini, timestamp_fin, "buscar_tipo",ESCLAVO, tipo_param, score_promedio, edad)
     return jsonify(resultados)
 
 if __name__ == '__main__':
