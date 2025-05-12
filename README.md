@@ -61,8 +61,8 @@ Biblioteca-Distribuida/
 ```env
 DB_HOST=127.0.0.1
 
-DB_USER=tu_usuario
-DB_PASSWORD=tu_contraseña
+DB_USER=root
+DB_PASSWORD=31032003 
 
 DB1=bd_tesis
 DB2=bd_libros
@@ -133,3 +133,31 @@ Buscar por tipo de documento (dirigido solo a los esclavos correspondientes):
 ```
 http://localhost:8000/query?tipo_doc=articulo+libro&edad=25
 ```
+
+## 🔎## Ejemplo de Log
+
+**Fecha y Hora de Recepción del Log**:  
+`[2025-05-11 21:57:27]`
+
+### Detalles del Log:
+- **timestamp_ini**: 1747015042.7488444
+- **timestamp_fin**: 1747015042.8749065
+- **maquina**: LAPTOP-M4TY
+- **tipo_maquina**: esclavo_tesis
+- **tipo_busqueda**: buscar_titulo
+- **query**: desarrollo
+- **score_promedio**: 6.67
+- **edad**: 25
+
+### Explicación de los Campos:
+- **timestamp_ini**: Tiempo de inicio del proceso.
+- **timestamp_fin**: Tiempo de finalización del proceso.
+- **maquina**: Nombre del host donde se ejecuta el proceso.
+- **tipo_maquina**: Tipo de nodo (esclavo) que ejecutó el proceso (en este caso, `esclavo_tesis`).
+- **tipo_busqueda**: Tipo de búsqueda realizada, que puede ser `buscar_titulo` o `buscar_tipo`.
+- **query**: La consulta que se realizó (en este caso, "desarrollo").
+- **score_promedio**: Promedio de las puntuaciones obtenidas durante la búsqueda.
+- **edad**: Edad proporcionada en la consulta (si no se proporciona, se asume 0).
+
+ 
+
