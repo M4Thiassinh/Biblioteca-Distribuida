@@ -9,6 +9,7 @@ Este proyecto implementa un sistema maestro-esclavo de búsqueda distribuida de 
 - Python 3.8+
 - MySQL Server escuchando en el puerto 3306
 - MySQL Workbench (opcional)
+- Docker version 28.0.1
 - Usuario MySQL configurado 
 - Paquetes Python:
   - flask
