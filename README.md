@@ -42,7 +42,8 @@ Biblioteca-Distribuida/
 │   ├── esclavo_articulos.py
 │   ├── esclavo_tesis.py
 │   ├── esclavo_libros.py
-│   └── esclavo_videos.py
+│   ├── esclavo_videos.py
+│   └── utils.py
 │
 ├── Servidor/
 │   └── servidor_logs.py
