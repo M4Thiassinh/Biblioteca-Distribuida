@@ -42,6 +42,26 @@ def calcular_score(doc, query, edad):
     for palabra in query.split():
         if normalizar(palabra) in palabras_titulo:
             score += 10
+    if score > 0:
+        # Preferencias por grupo de edad
+        if 10 <= edad <= 15 and doc['genero'] == PREFERENCIAS["10-15"]:
+            score += 5
+        elif 16 <= edad <= 25 and doc['genero'] == PREFERENCIAS["16-25"]:
+            score += 5
+        elif edad >= 26 and doc['genero'] == PREFERENCIAS["26+"]:
+            score += 5
+
+    return score
+
+def calcular_score_tipo(doc, query, edad):
+    score = 0
+    # Normalizamos y separamos las palabras del título
+    palabras_titulo = [normalizar(p) for p in doc['titulo'].split()]
+    
+    # Comparamos cada palabra normalizada de la query
+    for palabra in query.split():
+        if normalizar(palabra) in palabras_titulo:
+            score += 10
     
     # Preferencias por grupo de edad
     if 10 <= edad <= 15 and doc['genero'] == PREFERENCIAS["10-15"]:

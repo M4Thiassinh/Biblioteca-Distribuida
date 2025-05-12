@@ -6,7 +6,7 @@ import Pyro5.api
 import socket
 import time
 import re
-from utils import calcular_score, enviar_log
+from utils import calcular_score, enviar_log, calcular_score_tipo
 
 LOG_SERVER_URI = "PYRONAME:logserver" 
 
@@ -68,7 +68,7 @@ def buscar_tipo():
     documentos = obtener_documentos()
     for doc in documentos:
         if doc['tipo'].lower() in tipos:
-            score = calcular_score(doc,'', edad)
+            score = calcular_score_tipo(doc,'', edad)
             doc_result = doc.copy()
             doc_result['score'] = score
             resultados.append(doc_result)
