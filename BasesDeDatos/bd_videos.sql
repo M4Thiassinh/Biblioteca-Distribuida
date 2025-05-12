@@ -1,4 +1,9 @@
-CREATE DATABASE bd_videos;
+/*!40101 SET NAMES utf8mb4 */;
+
+CREATE DATABASE IF NOT EXISTS bd_videos
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
 USE bd_videos;
 
 CREATE TABLE documentos (
@@ -7,23 +12,26 @@ CREATE TABLE documentos (
     tipo VARCHAR(50),
     genero VARCHAR(100),
     contenido TEXT
-);
+) 
+  ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO documentos (titulo, tipo, genero, contenido) VALUES
-('Viaje al centro del átomo', 'video', 'ciencia', 'contenido...'),
-('El impacto de la IA en el trabajo', 'video', 'tecnología', 'contenido...'),
-('Civilizaciones del futuro', 'video', 'ciencia ficción', 'contenido...'),
-('Tornados: ciencia en acción', 'video', 'ciencia', 'contenido...'),
-('La historia de la computación', 'video', 'tecnología', 'contenido...'),
-('Aliens y contacto', 'video', 'ciencia ficción', 'contenido...'),
-('Biotecnología hoy', 'video', 'ciencia', 'contenido...'),
-('Vehículos autónomos explicados', 'video', 'tecnología', 'contenido...'),
-('Colonias en la luna', 'video', 'ciencia ficción', 'contenido...'),
-('Vacunas del futuro', 'video', 'ciencia', 'contenido...'),
-('Internet de las cosas explicado', 'video', 'tecnología', 'contenido...'),
-('La vida en Marte', 'video', 'ciencia ficción', 'contenido...'),
-('Genoma humano en detalle', 'video', 'ciencia', 'contenido...'),
-('Cómo funciona un CPU', 'video', 'tecnología', 'contenido...'),
-('Sueños virtuales', 'video', 'ciencia ficción', 'contenido...'),
-('El poder de los imanes', 'video', 'ciencia', 'contenido...'),
-('Nube y computación moderna', 'video', 'tecnología', 'contenido...');
+('Inteligencia Artificial explicada', 'video', 'tecnología', 'contenido...'),
+('Viaje al centro del universo', 'video', 'ciencia ficción', 'contenido...'),
+('La evolución del ser humano', 'video', 'ciencia', 'contenido...'),
+('Realidades virtuales y cerebros', 'video', 'ciencia ficción', 'contenido...'),
+('Redes neuronales profundas', 'video', 'tecnología', 'contenido...'),
+('Exploración del océano profundo', 'video', 'ciencia', 'contenido...'),
+('Futuros posibles: utopías y distopías', 'video', 'ciencia ficción', 'contenido...'),
+('Robótica avanzada', 'video', 'tecnología', 'contenido...'),
+('Microbiología moderna', 'video', 'ciencia', 'contenido...'),
+('Naves espaciales autónomas', 'video', 'tecnología', 'contenido...'),
+('Paradojas del tiempo', 'video', 'ciencia ficción', 'contenido...'),
+('Átomos y partículas', 'video', 'ciencia', 'contenido...'),
+('Ciberimplantes humanos', 'video', 'tecnología', 'contenido...'),
+('Universos paralelos', 'video', 'ciencia ficción', 'contenido...'),
+('La tabla periódica animada', 'video', 'ciencia', 'contenido...'),
+('Smart cities: el futuro urbano', 'video', 'tecnología', 'contenido...'),
+('La conciencia en las máquinas', 'video', 'ciencia ficción', 'contenido...');

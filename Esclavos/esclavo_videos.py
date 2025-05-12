@@ -20,7 +20,10 @@ def obtener_documentos():
         host=os.getenv("DB_HOST"),
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB3")
+        database=os.getenv("DB3"),
+        port=3309,
+        charset='utf8mb4',
+        use_unicode=True
     )
     cursor = conexion.cursor(dictionary=True)
     query = "SELECT * FROM documentos WHERE tipo = 'video'"

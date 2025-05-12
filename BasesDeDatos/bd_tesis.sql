@@ -1,4 +1,9 @@
-CREATE DATABASE bd_tesis;
+/*!40101 SET NAMES utf8mb4 */;
+
+CREATE DATABASE IF NOT EXISTS bd_tesis
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
 USE bd_tesis;
 
 CREATE TABLE documentos (
@@ -7,7 +12,10 @@ CREATE TABLE documentos (
     tipo VARCHAR(50),
     genero VARCHAR(100),
     contenido TEXT
-);
+) 
+  ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO documentos (titulo, tipo, genero, contenido) VALUES
 ('Cálculo Multivariable', 'tesis', 'ciencia', 'contenido...'),

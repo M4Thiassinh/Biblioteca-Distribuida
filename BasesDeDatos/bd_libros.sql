@@ -1,4 +1,9 @@
-CREATE DATABASE bd_libros;
+/*!40101 SET NAMES utf8mb4 */;
+
+CREATE DATABASE IF NOT EXISTS bd_libros
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
 USE bd_libros;
 
 CREATE TABLE documentos (
@@ -7,26 +12,26 @@ CREATE TABLE documentos (
     tipo VARCHAR(50),
     genero VARCHAR(100),
     contenido TEXT
-);
+) 
+  ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO documentos (titulo, tipo, genero, contenido) VALUES
-('El Principito', 'libro', 'ciencia ficción', 'contenido...'),
-('La teoría del todo', 'libro', 'ciencia', 'contenido...'),
-('Aprendiendo Python', 'libro', 'tecnología', 'contenido...')
-('Cien Años de Soledad', 'libro', 'ciencia ficción', 'contenido...'),
-('Breves respuestas a las grandes preguntas', 'libro', 'ciencia', 'contenido...'),
-('Inteligencia Artificial para principiantes', 'libro', 'tecnología', 'contenido...'),
-('La Odisea', 'libro', 'ciencia ficción', 'contenido...'),
-('Cosmos', 'libro', 'ciencia', 'contenido...'),
-('Código Limpio', 'libro', 'tecnología', 'contenido...'),
-('1984', 'libro', 'ciencia ficción', 'contenido...'),
-('El Universo en una Cáscara de Nuez', 'libro', 'ciencia', 'contenido...'),
-('Estructura de Datos en Python', 'libro', 'tecnología', 'contenido...'),
-('Fundación', 'libro', 'ciencia ficción', 'contenido...'),
-('Breve Historia del Tiempo', 'libro', 'ciencia', 'contenido...'),
-('Machine Learning 101', 'libro', 'tecnología', 'contenido...'),
-('Crónicas Marcianas', 'libro', 'ciencia ficción', 'contenido...'),
-('El Gen Egoísta', 'libro', 'ciencia', 'contenido...'),
-('Redes Neuronales con Python', 'libro', 'tecnología', 'contenido...'),
-('Neuromante', 'libro', 'ciencia ficción', 'contenido...'),
-('La ciencia de la computación', 'libro', 'ciencia', 'contenido...');
+('El universo en expansión', 'libro', 'ciencia', 'contenido...'),
+('Nanotecnología para principiantes', 'libro', 'tecnología', 'contenido...'),
+('La máquina del tiempo', 'libro', 'ciencia ficción', 'contenido...'),
+('Genética avanzada', 'libro', 'ciencia', 'contenido...'),
+('Tecnologías del mañana', 'libro', 'tecnología', 'contenido...'),
+('Mundos imaginarios', 'libro', 'ciencia ficción', 'contenido...'),
+('Física para curiosos', 'libro', 'ciencia', 'contenido...'),
+('Guía práctica de IA', 'libro', 'tecnología', 'contenido...'),
+('Exploradores del futuro', 'libro', 'ciencia ficción', 'contenido...'),
+('Biología sin fronteras', 'libro', 'ciencia', 'contenido...'),
+('Impresión 4D: el siguiente paso', 'libro', 'tecnología', 'contenido...'),
+('Alienígenas y contactos', 'libro', 'ciencia ficción', 'contenido...'),
+('El cerebro descifrado', 'libro', 'ciencia', 'contenido...'),
+('Robots entre nosotros', 'libro', 'tecnología', 'contenido...'),
+('Dimensiones ocultas', 'libro', 'ciencia ficción', 'contenido...'),
+('Neurociencia para todos', 'libro', 'ciencia', 'contenido...'),
+('Tecnología y sociedad', 'libro', 'tecnología', 'contenido...');

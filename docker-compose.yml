@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mysql_tesis:
+    image: mysql:5.7
+    container_name: mysql_tesis
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB1}
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./BasesDeDatos/bd_tesis.sql:/docker-entrypoint-initdb.d/bd_tesis.sql
+
+  mysql_libros:
+    image: mysql:5.7
+    container_name: mysql_libros
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB2}
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./BasesDeDatos/bd_libros.sql:/docker-entrypoint-initdb.d/bd_libros.sql
+
+  mysql_videos:
+    image: mysql:5.7
+    container_name: mysql_videos
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB3}
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./BasesDeDatos/bd_videos.sql:/docker-entrypoint-initdb.d/bd_videos.sql
+
+  mysql_articulos:
+    image: mysql:5.7
+    container_name: mysql_articulos
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB4}
+    ports:
+      - "3310:3306"
+    volumes:
+      - ./BasesDeDatos/bd_articulos.sql:/docker-entrypoint-initdb.d/bd_articulos.sql

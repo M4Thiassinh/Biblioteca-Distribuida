@@ -26,7 +26,10 @@ def obtener_documentos():
         host=os.getenv("DB_HOST"),
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB1")
+        database=os.getenv("DB1"),
+        port=3307,
+        charset='utf8mb4',
+        use_unicode=True
     )
     cursor = conexion.cursor(dictionary=True)
     query = "SELECT * FROM documentos WHERE tipo = 'tesis'"

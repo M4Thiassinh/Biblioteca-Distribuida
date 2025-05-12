@@ -29,6 +29,12 @@ pip install flask Pyro5 mysql-connector-python python-dotenv
 ```
 Biblioteca-Distribuida/
 │
+├── BasesDeDatos/
+│   ├── bd_tesis.sql
+│   ├── bd_libros.sql
+│   ├── bd_videos.sql
+│   └── bd_articulos.sql
+│
 ├── Maestro/
 │   └── maestro.py
 │
@@ -42,7 +48,9 @@ Biblioteca-Distribuida/
 │   └── servidor_logs.py
 │
 ├── .env 
+├── docker-compose.yml
 └── README.md
+
 ```
 
 ---
@@ -50,20 +58,27 @@ Biblioteca-Distribuida/
 ## 🧾 Información del archivo .env
 
 ```env
-DB_HOST=localhost
-DB_USER=su_usuario
-DB_PASSWORD=su_contraseña
+DB_HOST=127.0.0.1
+
+DB_USER=tu_usuario
+DB_PASSWORD=tu_contraseña
+
 DB1=bd_tesis
 DB2=bd_libros
 DB3=bd_videos
 DB4=bd_articulos
+
 ```
 
 ---
 
 ## 🚀 Ejecución
 
-Asegúrate de tener el servidor MySQL corriendo en el puerto 3308.
+Primero ejecutar 
+```bash
+docker compose up -d  
+``` 
+para levantar los contenedores de las bases de datos.
 
 ### Terminal 1 — Iniciar NameServer de Pyro5
 

@@ -24,6 +24,9 @@ def obtener_documentos():
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD"),
         database=os.getenv("DB4"),
+        port=3310,
+        charset='utf8mb4',
+        use_unicode=True
     )
     cursor = conexion.cursor(dictionary=True)
     query = "SELECT * FROM documentos WHERE tipo = 'articulo'"
