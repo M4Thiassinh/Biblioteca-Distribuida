@@ -134,7 +134,7 @@ Buscar por tipo de documento (dirigido solo a los esclavos correspondientes):
 http://localhost:8000/query?tipo_doc=articulo+libro&edad=25
 ```
 
-## 🔎## Ejemplo de Log
+## 🔎 Ejemplo de Log
 
 **Fecha y Hora de Recepción del Log**:  
 `[2025-05-11 21:57:27]`
